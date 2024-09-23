@@ -1,54 +1,37 @@
-# Astro Starter Kit: Basics
+## Islas
 
-```sh
-npm create astro@latest -- --template basics
+Tipo de arq en el frontend (sobre todo estaticas) donde se pueden segmentar porciones dinamicas, esto optimiza el js al no convertir toda la pagina en dinamica, sino solo ciertas areas y componentes
+
+## Estructura del proyecto
+
+Contamos con dos carpetas principales, _./public_ y _./src_,
+
+### Carpeta src
+
+En ./src contamos con un archivo _env.d.ts_ que trae la configuración de TS al proyecto.
+En la carpeta ./src/pages contamos con el _index.astro_ de la aplicación, en este archivo contamos con una sintaxis de Astro (similar JSX).
+
+Al inicio del archivo contamos con un bloque de "---" donde se importan los componentes y también podemos escribir nuesrto código js o ts, definir las props, etc.
+
+A continuación tenemos el código HTML envuelto en un componente (parecido a los de react) con su propiedad title definida.
+
+Al final contamos con el bloque de estilos del sitio. Estos estilos tienen su propio _"scope"_, esto quiere deir que los estilos de una regla main{} solo afectan al _main_ del mismo componente donde se alojan, no aplican a otros main del DOM.
+
+En la carpeta ./src/layout contamos con componentes especiales que envuelven parte de nuestra aplicación. Estos componentes pueden recibir propiedades definidas en su propio archivo defininedo una _interface_:
+
+```js
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Podemos acceder a estas propiedades del objeto global _Astro_.
+También podemos definir estilos globales añadiendo "is:global" a la etiqueda style.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```html
+<style is:global></style>
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Al final tenemos la carpeta ./src/components, en donde se alojarán todos los componentes de nuestra aplicaión. A diferencia de react no tenemos que repetir tanto código al exportarlos y toma ciertas funcionalidades de JSX.
