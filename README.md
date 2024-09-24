@@ -11,7 +11,10 @@ Contamos con dos carpetas principales, _./public_ y _./src_,
 En ./src contamos con un archivo _env.d.ts_ que trae la configuración de TS al proyecto.
 En la carpeta ./src/pages contamos con el _index.astro_ de la aplicación, en este archivo contamos con una sintaxis de Astro (similar JSX).
 
-Al inicio del archivo contamos con un bloque de "---" donde se importan los componentes y también podemos escribir nuesrto código js o ts, definir las props, etc.
+Al inicio del archivo contamos con un bloque de (---) donde se importan los componentes y también podemos escribir nuesrto código js o ts, definir las props, etc.
+
+La valla de código (---) está diseñada para garantizar que el código JavaScript que escribes adentro se encuentre “encapsulado”. Este código no se filtrará a tu aplicación, o llegará al usuario final. Puedes escribir código que sea costoso o sensible (como una llamada a la base de datos) sin preocuparte por que estos datos sensibles lleguen al navegador del usuario.
+
 
 A continuación tenemos el código HTML envuelto en un componente (parecido a los de react) con su propiedad title definida.
 
@@ -35,3 +38,36 @@ También podemos definir estilos globales añadiendo "is:global" a la etiqueda s
 ```
 
 Al final tenemos la carpeta ./src/components, en donde se alojarán todos los componentes de nuestra aplicaión. A diferencia de react no tenemos que repetir tanto código al exportarlos y toma ciertas funcionalidades de JSX.
+
+## Sistema de integración
+
+Con el comando
+
+```terminal
+ pnpm astro add --help
+```
+
+podemos observar todas las integraciones disponibles que podemos agregar con un solo comando
+
+## Markdown
+
+Astro es totalmente compatible con markdown, ya que lo soporta nativamente.
+Únicamente se crea la página con su formato correspondiende y se agregan sus propiedades antes de todo el contenido md entre ---
+
+```md
+---
+title: "Contenido de la pagina"
+layout: "../layouts/Layout.astro"
+---
+```
+
+Aqui se define el layout y las propiedades para que tome los estilos de la aplicación
+
+## Fetching de datos
+
+## Notas
+
+El Layout es un componente que siempre envuelve a la aplicación. Se pueden tener multiples Layouts, uno general y algunos más especificos
+
+Los slots nos permiten asignar el contenido del componente. Sin embargo, a cada slot podemos asignarle un name, el cual nos ayudará a posicionar el contenido en partes especificas
+Además, dentro del slot se puede definir un contenido por defecto, en cao de que no se le pase algún contenido individual, esto funciona tanto para los slots nombrados como para los normales
